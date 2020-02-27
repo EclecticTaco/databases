@@ -5,7 +5,7 @@ USE chat;
 CREATE TABLE users (
 
   userID INT,
-  username VARCHAR(50),
+  userName VARCHAR(50),
   PRIMARY KEY (userID)
 
 );
@@ -16,6 +16,7 @@ CREATE TABLE messages (
   messageBody VARCHAR(240),
   roomName VARCHAR(20),
   senderID INT,
+  userName VARCHAR(50),
   PRIMARY KEY (messageID),
   FOREIGN KEY (senderID) REFERENCES users(userID)
 );
