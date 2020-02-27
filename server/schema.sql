@@ -4,20 +4,30 @@ USE chat;
 
 CREATE TABLE users (
 
-  userID INT, username VARCHAR(50), PRIMARY KEY (userID);
+  userID INT,
+  username VARCHAR(50),
+  PRIMARY KEY (userID)
 
 );
 
 
 CREATE TABLE messages (
-  messageID INT, messageBody VARCHAR(240), roomName VARCHAR(20), FOREIGN KEY (senderID), REFERENCES (users(userID));
+  messageID INT,
+  messageBody VARCHAR(240),
+  roomName VARCHAR(20),
+  senderID INT,
+  PRIMARY KEY (messageID),
+  FOREIGN KEY (senderID) REFERENCES users(userID)
 );
 
 /* Create other tables and define schemas for them here! */
 
 CREATE TABLE friends (
 
-FOREIGN KEY (userID1) REFERENCES users(userID), FOREIGN KEY (userID2) REFERENCES users(userID);
+userID1 INT,
+userID2 INT,
+FOREIGN KEY (userID1) REFERENCES users(userID),
+FOREIGN KEY (userID2) REFERENCES users(userID)
 
 );
 
@@ -27,3 +37,4 @@ FOREIGN KEY (userID1) REFERENCES users(userID), FOREIGN KEY (userID2) REFERENCES
  *    mysql -u root < server/schema.sql
  *  to create the database and the tables.*/
 
+-- ERROR 1072 (42000) at line 14: Key column 'senderID' doesn't exist in table
