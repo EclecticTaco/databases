@@ -2,8 +2,6 @@ CREATE DATABASE chat;
 
 USE chat;
 
-
-
 CREATE TABLE users (
 
   userID INT, username VARCHAR(50), PRIMARY KEY (userID);
@@ -16,8 +14,6 @@ CREATE TABLE messages (
 );
 
 /* Create other tables and define schemas for them here! */
-
-
 
 CREATE TABLE friends (
 
