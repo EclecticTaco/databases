@@ -4,7 +4,7 @@ var express = require('express');
 module.exports = {
   messages: {
     get: function (callback) {
-      connection.query('SELECT * FROM messages', (err, results, fields) => {
+      db.query('SELECT * FROM messages', (err, results, fields) => {
         if (err) {
           callback(err, '');
         } else {
@@ -13,7 +13,8 @@ module.exports = {
       });
     }, // a function which produces all the messages
     post: function (text, callback) {
-      connection.query(`INSERT INTO messages (messageBody) VALUES (${text})`, (err, text) => {
+      console.log('text:', text, 'db:', db);
+      db.connection.query(`INSERT INTO messages (messageBody) VALUES (${text})`, (err, text) => {
         if (err) {
           callback(err, '');
         } else {
@@ -25,8 +26,24 @@ module.exports = {
 
   users: {
     // Ditto as above.
-    get: function () { },
-    post: function () { }
+    get: function (callback) {
+      db.connection.query('SELECT * FROM users', (err, results, fields) => {
+        if (err) {
+          callback(err, '');
+        } else {
+          callback(null, results);
+        }
+      });
+    },
+    post: function (text, callback) {
+      db.query(`INSERT INTO users (userName) VALUES (${text})`, (err, text) => {
+        if (err) {
+          callback(err, '');
+        } else {
+          callback(null, text);
+        }
+      });
+    }
   }
 };
 
