@@ -5,8 +5,8 @@ var mysql = require('mysql');
 // and to the database 'chat'.
 var connection = mysql.createConnection({
   host: 'localhost',
-  user: 'root',
-  password: 'Qzwxcrvtb1?',
+  user: 'student',
+  password: 'student',
   database: 'chat'
 });
 
