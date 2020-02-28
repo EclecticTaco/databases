@@ -14,8 +14,8 @@ module.exports = {
       });
     }, // a function which produces all the messages
     post: function (text, callback) {
-      console.log('post M', text)
-      db.query(`INSERT INTO messages (messageBody) VALUES (${text})`, (err, ) => {
+      console.log('text to post to SQL: ', text);
+      db.query(`INSERT INTO messages (messageBody) VALUES (${text})`, (err) => {
         if (err) {
           callback(err);
         } else {
@@ -28,7 +28,7 @@ module.exports = {
   users: {
     // Ditto as above.
     get: function (callback) {
-    db.query('SELECT * FROM users', (err, results, fields) => {
+      db.query('SELECT * FROM users', (err, results, fields) => {
         if (err) {
           callback(err, '');
         } else {
@@ -37,13 +37,13 @@ module.exports = {
       });
     },
     post: function (text, callback) {
-      console.log(text);
-      db.query(`INSERT INTO users (userName) VALUES (${text})`, (err, results) => {
-        console.log('results', results);
+      var sql = `INSERT INTO messages (messageBody) VALUES (${text})`;
+      db.query(sql, (err, results) => {
+
         if (err) {
-          callback(err, '');
+          callback(err, console.log('error at modles post CB'));
         } else {
-          callback(null, text);
+          callback(null, results);
         }
       });
     }
