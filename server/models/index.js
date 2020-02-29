@@ -38,7 +38,8 @@ module.exports = {
       });
     },
     post: function (text, callback) {
-      db.query(`INSERT INTO users (userName) VALUES (${text})`, (err, results) => {
+      console.log('text at models POST: '. text);
+      db.query('INSERT INTO users (userName) VALUES(?)', [text], (err, results) => {
         if (err) {
           callback(err, '');
         } else {

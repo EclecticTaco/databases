@@ -14,7 +14,6 @@ module.exports = {
       });
     }, // a function which handles a get request for all messages
     post: function (req, res) {
-      console.log(req.body);
       var sqlObj = {
         userName: req.body.userName,
         messageBody: req.body.messageBody,
@@ -22,12 +21,9 @@ module.exports = {
       };
       models.messages.post(sqlObj, (err, sqlObj) => {
         if (err) {
-          console.log('ERROR in controller post', err);
           res.sendStatus(400);
           res.end(err);
         } else {
-          console.log('controller posted: ');
-          console.log('text var in controller post:', sqlObj);
           res.sendStatus(201);
           res.end(err, sqlObj);
 
@@ -49,12 +45,14 @@ module.exports = {
       });
     },
     post: function (req, res) {
-      models.users.post(req.body.userName, (err, results) => {
+      var text = req.body.userName;
+      models.users.post(text, (err, results) => {
         if (err) {
+          console.log('error at controller user POST: ', err);
           res.sendStatus(400);
         } else {
           res.sendStatus(201);
-
+          res.end(results.toString());
         }
       });
     }

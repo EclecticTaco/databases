@@ -4,7 +4,7 @@ USE chat;
 
 CREATE TABLE users (
 
-  userID INT,
+  userID INT NOT NULL AUTO_INCREMENT,
   userName VARCHAR(50),
   PRIMARY KEY (userID)
 
