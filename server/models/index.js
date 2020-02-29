@@ -14,12 +14,12 @@ module.exports = {
       });
     }, // a function which produces all the messages
     post: function (text, callback) {
-      console.log('text to post to SQL: ', text);
-      db.query(`INSERT INTO messages (messageBody) VALUES (${text})`, (err) => {
+      db.query('INSERT INTO messages (messageBody) VALUES(?);', [text], (err, results) => {
         if (err) {
+          console.log('error at models POST: SQL ERROR!');
           callback(err);
         } else {
-          callback();
+          callback(null, results);
         }
       });
     } // a function which can be used to insert a message into the database
@@ -37,13 +37,11 @@ module.exports = {
       });
     },
     post: function (text, callback) {
-      var sql = `INSERT INTO messages (messageBody) VALUES (${text})`;
-      db.query(sql, (err, results) => {
-
+      db.query(`INSERT INTO users (userName) VALUES (${text})`, (err, results) => {
         if (err) {
-          callback(err, console.log('error at modles post CB'));
+          callback(err, '');
         } else {
-          callback(null, results);
+          callback(null, text);
         }
       });
     }

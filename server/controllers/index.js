@@ -14,12 +14,15 @@ module.exports = {
       });
     }, // a function which handles a get request for all messages
     post: function (req, res) {
-      // console.log('REQ', req.body.messageBody)
-      models.messages.post(req.body.messageBody, (err, text) => {
+      var text = req.body.messageBody;
+      models.messages.post(text, (err, text) => {
         if (err) {
-          console.log('err in controller post', err);
+          console.log('ERROR in controller post', err);
           res.sendStatus(400);
+          res.end(err);
         } else {
+          console.log('controller posted: ');
+          console.log('text var in controller post:', text);
           res.sendStatus(201);
           res.end(err, text);
 
@@ -42,7 +45,6 @@ module.exports = {
     },
     post: function (req, res) {
       models.users.post(req.body.userName, (err, results) => {
-        // console.log(req.body.userName)
         if (err) {
           res.sendStatus(400);
         } else {
