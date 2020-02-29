@@ -13,8 +13,9 @@ module.exports = {
         }
       });
     }, // a function which produces all the messages
-    post: function (text, callback) {
-      db.query('INSERT INTO messages (messageBody) VALUES(?);', [text], (err, results) => {
+    post: function (sqlObj, callback) {
+
+      db.query('INSERT INTO messages (messageBody, roomName, userName) VALUES(?,?,?);', [sqlObj.messageBody, sqlObj.roomName, sqlObj.userName], (err, results) => {
         if (err) {
           console.log('error at models POST: SQL ERROR!');
           callback(err);

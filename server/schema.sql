@@ -12,7 +12,7 @@ CREATE TABLE users (
 
 
 CREATE TABLE messages (
-  messageID INT,
+  messageID INT NOT NULL AUTO_INCREMENT,
   messageBody VARCHAR(240),
   roomName VARCHAR(20),
   senderID INT,
